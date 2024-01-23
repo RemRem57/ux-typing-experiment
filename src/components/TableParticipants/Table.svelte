@@ -1,9 +1,112 @@
 <script lang="ts">
-    import type {User} from "../../types";
+    import type {User} from ".//src/types";
+    import {_} from "svelte-i18n";
+    import ExcelJS from "exceljs";
 
     export let participants: User[] = [];
+
+    // Export excel test
+    const exportBtnClick = async () => {
+        const data = participants.map((participant) => {
+            const experienceGrades = participant.experienceGrades.map((grade) => {
+                return {
+                    question: grade.ids,
+                    grade: grade.grade
+                }
+            })
+            const experiments = participant.experiments.map((experiment) => {
+                const events = experiment.events.map((event) => {
+                    return {
+                        type: event.type,
+                        success: event.success,
+                        position: event.position,
+                        ms: event.ms
+                    }
+                })
+                const questions = experiment.questions.map((question) => {
+                    return {
+                        question: question.ids,
+                        grade: question.grade
+                    }
+                })
+                return {
+                    id: experiment.id,
+                    events: events,
+                    questions: questions
+                }
+            })
+            return {
+                sexe: participant.sexe,
+                age: participant.age,
+                anyExperience: participant.anyExperience,
+                device: participant.device,
+                experienceGrades: experienceGrades,
+                experiments: experiments
+            }
+        });
+
+        // Create workbook
+        const workbook = new ExcelJS.Workbook();
+        const sheet = workbook.addWorksheet('Sheet1');
+
+        // Add header
+        sheet.addRow([
+            'Sexe',
+            'Age',
+            'Any experience',
+            'Device',
+            'Experience grades',
+            'Experiments'
+        ]);
+
+        // Add data
+        data.forEach((participant) => {
+            const experienceGrades = participant.experienceGrades.map((grade) => {
+                return `${grade.ids} : ${grade.grade}`
+            })
+            const experiments = participant.experiments.map((experiment) => {
+                const events = experiment.events.map((event) => {
+                    return `${event.type} : ${event.success} : ${event.position} : ${event.ms}`
+                })
+                const questions = experiment.questions.map((question) => {
+                    return `${question.ids} : ${question.grade}`
+                })
+                return `${experiment.id} : ${events} : ${questions}`
+            })
+            sheet.addRow([
+                participant.sexe,
+                participant.age,
+                participant.anyExperience,
+                participant.device,
+                experienceGrades,
+                experiments
+            ]);
+        })
+
+        // Export file
+        const buffer = await workbook.xlsx.writeBuffer();
+        const blob = new Blob([buffer], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+
+
+        // let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+        var url = window.URL || window.webkitURL;
+        let link = url.createObjectURL(blob);
+
+        // Cheat code to download file
+        let a = document.createElement("a");
+        a.setAttribute("download", `participants.xlsx`);
+        a.setAttribute("href", link);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 </script>
 
+<div class={`next-btn d-flex justify-content-center my-5`}>
+    <button class="btn btn-primary my-auto" on:click={exportBtnClick}>
+        <slot>{$_('export all')}</slot>
+    </button>
+</div>
 
 <div class="participants">
     <h2>Participants</h2>

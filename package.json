@@ -33,6 +33,7 @@
   "type": "module",
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
+    "exceljs": "^4.4.0",
     "firebase": "^9.0.2",
     "highcharts": "^9.2.2",
     "swiper": "^7.4.1",
