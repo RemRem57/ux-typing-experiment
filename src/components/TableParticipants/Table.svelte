@@ -1,7 +1,9 @@
 <script lang="ts">
-    import type {User} from ".//src/types";
+    import type {User, Event} from "../../types";
     import {_} from "svelte-i18n";
     import ExcelJS from "exceljs";
+    import type {ExperimentID} from "../../types";
+    import {getExperienceIds} from "../../utils";
 
     export let participants: User[] = [];
 
@@ -47,40 +49,72 @@
 
         // Create workbook
         const workbook = new ExcelJS.Workbook();
-        const sheet = workbook.addWorksheet('Sheet1');
+        const sheet = workbook.addWorksheet('Participants');
+        const sheetExperiments: { [key: string]: ExcelJS.Worksheet } = {};
+        const experimentIds = getExperienceIds();
+        experimentIds.forEach((id) => {
+            sheetExperiments[id] = workbook.addWorksheet(`Experiment ${id}`);
+            // TODO : add some calculations
+            sheetExperiments[id].addRow([
+                'ID_USER',
+                'Error count',
+                'Total time',
+                'Simultaneous typing characters',
+                'Unpleasant / pleasant',
+                'Not practical / practical',
+                'Not nice / nice',
+                'Tedious / effective',
+            ]);
+        })
 
         // Add header
         sheet.addRow([
+            'ID',
             'Sexe',
             'Age',
-            'Any experience',
+            'Any experience (0-6)',
             'Device',
-            'Experience grades',
-            'Experiments'
+            'Unpleasant / pleasant',
+            'Simple / complicated',
+            'Practical / not practical',
+            'Tedious / effective',
+            'Good / bad',
+            'Motivating / discouraging',
         ]);
 
         // Add data
-        data.forEach((participant) => {
+        data.forEach((participant, index) => {
             const experienceGrades = participant.experienceGrades.map((grade) => {
-                return `${grade.ids} : ${grade.grade}`
-            })
-            const experiments = participant.experiments.map((experiment) => {
-                const events = experiment.events.map((event) => {
-                    return `${event.type} : ${event.success} : ${event.position} : ${event.ms}`
-                })
-                const questions = experiment.questions.map((question) => {
-                    return `${question.ids} : ${question.grade}`
-                })
-                return `${experiment.id} : ${events} : ${questions}`
+                return grade.grade
             })
             sheet.addRow([
+                index,
                 participant.sexe,
                 participant.age,
                 participant.anyExperience,
                 participant.device,
-                experienceGrades,
-                experiments
+                experienceGrades[0],
+                experienceGrades[1],
+                experienceGrades[2],
+                experienceGrades[3],
+                experienceGrades[4],
+                experienceGrades[5],
             ]);
+
+            participant.experiments.forEach((experiement) => {
+                const experimentSheet = sheetExperiments[experiement.id];
+                experiement.events
+                experimentSheet.addRow([
+                    index,
+                    experiement.events.reduce((acc, event) => acc + (event.success ? 0 : 1), 0),
+                    experiement.events[experiement.events.length - 1]?.ms,
+                    findCharactersInARow(experiement.events),
+                    experiement.questions[0].grade,
+                    experiement.questions[1].grade,
+                    experiement.questions[2].grade,
+                    experiement.questions[3].grade,
+                ]);
+            })
         })
 
         // Export file
@@ -100,6 +134,38 @@
         a.click();
         document.body.removeChild(a);
     }
+
+    // Fonction pour calculer la moyenne d'un tableau de nombres
+    const calculateMean = (array: number[]): number => {
+        return array.reduce((sum, value) => sum + value, 0) / array.length;
+    };
+
+    // Fonction pour calculer l'écart-type d'un tableau de nombres
+    const calculateStandardDeviation = (array: number[]): number => {
+        const mean = calculateMean(array);
+        const squaredDifferences = array.map(value => Math.pow(value - mean, 2));
+        const variance = calculateMean(squaredDifferences);
+        return Math.sqrt(variance);
+    };
+
+    // Fonction pour trouver le nombre de caractères saisis à la suite en utilisant l'écart-type comme seuil
+    const findCharactersInARow = (events: Event[]): number => {
+        const msThreshold = calculateStandardDeviation(events.map(event => event.ms)) * 2; // Vous pouvez ajuster le multiplicateur si nécessaire
+        let charactersInARow = 0;
+
+        for (let i = 1; i < events.length; i++) {
+            const timeDifference = events[i].ms - events[i - 1].ms;
+
+            if (timeDifference <= msThreshold) {
+                charactersInARow++;
+            } else {
+                // Réinitialiser le compteur si la différence de temps dépasse le seuil
+                charactersInARow = 0;
+            }
+        }
+
+        return charactersInARow;
+    };
 </script>
 
 <div class={`next-btn d-flex justify-content-center my-5`}>
