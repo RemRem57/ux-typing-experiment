@@ -96,5 +96,25 @@
   "continue": "Fortfahren",
   "loading": "Lädt...",
   "events_limit_reached": "Sie haben die maximale Anzahl an Eingaben erreicht!",
-  "experience_evaluation_title": "Wie fanden Sie diese Art der Darstellung und Eingabe der Zeichenfolge?"
+  "experience_evaluation_title": "Wie fanden Sie diese Art der Darstellung und Eingabe der Zeichenfolge?",
+  "participants": {
+    "title": "Heil Hit... ",
+    "table": {
+      "sexe": "",
+      "age": "",
+      "anyExp": "",
+      "device": "",
+      "expGrade": "",
+      "experiments": "",
+      "question": "",
+      "grade": "",
+      "expId": "",
+      "events": "",
+      "questions": "",
+      "type": "",
+      "success": "",
+      "position": "",
+      "export": ""
+    }
+  }
 }

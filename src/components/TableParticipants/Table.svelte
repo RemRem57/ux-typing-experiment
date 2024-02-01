@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {User, Event} from "../../types";
-    import {_} from "svelte-i18n";
+    import { _ } from 'svelte-i18n';
     import ExcelJS from "exceljs";
     import type {ExperimentID} from "../../types";
     import {getExperienceIds} from "../../utils";
@@ -168,26 +168,20 @@
     };
 </script>
 
-<div class={`next-btn d-flex justify-content-center my-5`}>
-    <button class="btn btn-primary my-auto" on:click={exportBtnClick}>
-        <slot>{$_('export all')}</slot>
-    </button>
-</div>
 
 <div class="participants">
-    <h2>Participants</h2>
-
-<!--    Table of all participants with bootstrap style-->
-
+    <button class="btn btn-primary mx-auto " on:click={exportBtnClick}>
+        <slot>{$_('participants.table.export')}</slot>
+    </button>
     <table class="table table-striped overflow-auto">
         <thead>
         <tr>
-            <th scope="col">Sexe</th>
-            <th scope="col">Age</th>
-            <th scope="col">Any experience</th>
-            <th scope="col">Device</th>
-            <th scope="col">Experience grades</th>
-            <th scope="col">Experiments</th>
+            <th scope="col">{$_('participants.table.sexe')}</th>
+            <th scope="col">{$_('participants.table.age')}</th>
+            <th scope="col">{$_('participants.table.anyExp')}</th>
+            <th scope="col">{$_('participants.table.device')}</th>
+            <th scope="col">{$_('participants.table.expGrade')}</th>
+            <th scope="col">{$_('participants.table.experiments')}</th>
         </tr>
         </thead>
         <tbody>
@@ -201,8 +195,8 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Question</th>
-                        <th scope="col">Grade</th>
+                        <th scope="col">{$_('participants.table.question')}</th>
+                        <th scope="col">{$_('participants.table.grade')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -219,9 +213,9 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Experiment ID</th>
-                        <th scope="col">Events</th>
-                        <th scope="col">Questions</th>
+                        <th scope="col">{$_('participants.table.expId')}</th>
+                        <th scope="col">{$_('participants.table.events')}</th>
+                        <th scope="col">{$_('participants.table.questions')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -232,9 +226,9 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Success</th>
-                                    <th scope="col">Position</th>
+                                    <th scope="col">{$_('participants.table.type')}</th>
+                                    <th scope="col">{$_('participants.table.success')}</th>
+                                    <th scope="col">{$_('participants.table.position')}</th>
                                     <th scope="col">Ms</th>
                                 </tr>
                                 </thead>
@@ -254,8 +248,8 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Question</th>
-                                    <th scope="col">Grade</th>
+                                    <th scope="col">{$_('participants.table.question')}</th>
+                                    <th scope="col">{$_('participants.table.grade')}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -280,5 +274,9 @@
 </div>
 
 <style lang="scss">
-
+    .participants {
+      display: flex;
+      flex-direction: column;
+        align-items: center;
+    }
 </style>
