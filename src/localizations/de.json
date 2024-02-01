@@ -96,5 +96,25 @@
   "continue": "Fortfahren",
   "loading": "Lädt...",
   "events_limit_reached": "Sie haben die maximale Anzahl an Eingaben erreicht!",
-  "experience_evaluation_title": "Wie fanden Sie diese Art der Darstellung und Eingabe der Zeichenfolge?"
+  "experience_evaluation_title": "Wie fanden Sie diese Art der Darstellung und Eingabe der Zeichenfolge?",
+  "participants": {
+    "title": "Tabelle der {count} Teilnehmer",
+    "table": {
+      "sexe": "Geschlecht",
+        "age": "Alter",
+        "anyExp": "Allgemeine Erfahrung",
+        "device": "Gerät",
+        "expGrade": "Erfahrungsgrad",
+        "experiments": "Experimente",
+        "question": "Frage",
+        "grade": "Niveau",
+        "expId": "ID des Experiments",
+        "events": "Ereignisse",
+        "questions": "Fragen",
+        "type": "Typ",
+        "success": "Erfolg",
+        "position": "Position",
+        "export": "Tabelle exportieren"
+    }
+  }
 }

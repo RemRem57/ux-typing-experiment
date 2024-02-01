@@ -96,5 +96,25 @@
   "continue": "Continue",
   "loading": "Loading...",
   "events_limit_reached": "You have reached your input limit!",
-  "experience_evaluation_title": "What do you think about this kind of presentation and way of entering this string?"
+  "experience_evaluation_title": "What do you think about this kind of presentation and way of entering this string?",
+  "participants": {
+    "title": "Table of {count} participants",
+    "table": {
+      "sexe": "Sexe",
+      "age": "Age",
+      "anyExp": "Any experience",
+      "device": "Device",
+      "expGrade": "Experience grades",
+      "experiments": "Experiments ",
+      "question": "Question",
+      "grade": "Grade",
+      "expId": "Experiment ID",
+      "events": "Events",
+      "questions": "Questions",
+      "type": "Type",
+      "success": "Success",
+      "position": "Position",
+      "export": "Export table"
+    }
+  }
 }

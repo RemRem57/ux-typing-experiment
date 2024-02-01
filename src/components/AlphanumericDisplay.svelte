@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ChunkLength } from '../types'
 
-  import { getChunk } from '../utils'
+  import { getChunk } from '../utils/utils'
 
   let className = ''
   export { className as class }

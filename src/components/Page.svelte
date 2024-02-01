@@ -3,7 +3,7 @@
   /* eslint-disable no-use-before-define */
   import BlobsArrangement, { BLOBS_ARRANGEMENT_IDS } from './Blob/BlobsArrangement.svelte'
 
-  import { getRandomInArray } from '../utils'
+  import { getRandomInArray } from '../utils/utils'
 
   export let id: string = undefined
   let className = ''
@@ -28,7 +28,7 @@
     section {
       max-width: 900px;
     }
-  
+
     .page {
       padding-top: 20vh;
     }

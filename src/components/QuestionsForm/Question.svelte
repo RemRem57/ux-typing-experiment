@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { reverseArray } from '../../utils'
+  import { reverseArray } from '../../utils/utils'
   import type { Question } from './QuestionsForm.svelte'
 
   export let question: Question

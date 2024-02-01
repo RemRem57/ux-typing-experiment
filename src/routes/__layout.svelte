@@ -13,7 +13,7 @@
   import { onMount } from 'svelte'
 
   import { screen } from '../stores'
-  import { getUserDevice } from '../utils'
+  import { getUserDevice } from '../utils/utils'
 
   import LocaleSelect from '../components/LocaleSelect.svelte'
   import Blob from '../components/Blob/Blob.svelte'
@@ -39,7 +39,7 @@
   }
 </script>
 
-<svelte:window 
+<svelte:window
   on:beforeunload={onPageAppLeave}
   bind:innerHeight={windowHeight}
   bind:innerWidth={windowWidth}
