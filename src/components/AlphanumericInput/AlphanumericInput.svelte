@@ -3,7 +3,7 @@
   import type { Event } from './utils'
 
   import { screen } from '../../stores'
-  import { getChunk, getWithAlphanumericOnly, isAlphanumeric } from '../../utils'
+  import { getChunk, getWithAlphanumericOnly, isAlphanumeric } from '../../utils/utils'
   import { getNewEventFromInput } from './utils'
   import { KEY } from '../../const'
 
@@ -124,5 +124,5 @@
 <style lang="scss">
   .chunk {
     width: var(--width);
-  }  
+  }
 </style>

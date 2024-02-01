@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition'
   import { _ } from 'svelte-i18n'
   import { CHUNK_SIZES } from '../const'
-  import { getRandomInArray } from '../utils'
+  import { getRandomInArray } from '../utils/utils'
 
   export let visible: boolean
 
@@ -21,7 +21,7 @@
 </script>
 
 {#if visible}
-  <div 
+  <div
     class="loading-screen position-absolute h-100 w-100 bg-background align-items-center justify-content-center"
     out:fade={{ duration: 500 }}
   >

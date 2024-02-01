@@ -2,7 +2,7 @@ import type {
   ChunkLength, Experiment, ExperimentID, Qualification
 } from '../../types'
 import { ALPHANUMERIC_LENGTH, CHUNK_SIZES } from '../../const'
-import { getAverage, getExperienceIds } from '../../utils'
+import { getAverage, getExperienceIds } from '../../utils/utils'
 
 export const getChartCategories = (): ChunkLength[] => {
   return [...CHUNK_SIZES, ALPHANUMERIC_LENGTH]

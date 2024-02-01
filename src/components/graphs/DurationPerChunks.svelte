@@ -6,7 +6,7 @@
 
   import type { Experiment } from '../../types'
 
-  import { getAverage, getChunkSizes, getFilteredExperiencesByChunkSize } from '../../utils'
+  import { getAverage, getChunkSizes, getFilteredExperiencesByChunkSize } from '../../utils/utils'
   import { getChartCategories, getExperienceDuration } from './utils'
 
   export let experiments: Experiment[]

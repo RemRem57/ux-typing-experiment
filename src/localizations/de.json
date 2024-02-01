@@ -98,23 +98,23 @@
   "events_limit_reached": "Sie haben die maximale Anzahl an Eingaben erreicht!",
   "experience_evaluation_title": "Wie fanden Sie diese Art der Darstellung und Eingabe der Zeichenfolge?",
   "participants": {
-    "title": "Heil Hit... ",
+    "title": "Tabelle der {count} Teilnehmer",
     "table": {
-      "sexe": "",
-      "age": "",
-      "anyExp": "",
-      "device": "",
-      "expGrade": "",
-      "experiments": "",
-      "question": "",
-      "grade": "",
-      "expId": "",
-      "events": "",
-      "questions": "",
-      "type": "",
-      "success": "",
-      "position": "",
-      "export": ""
+      "sexe": "Geschlecht",
+        "age": "Alter",
+        "anyExp": "Allgemeine Erfahrung",
+        "device": "Gerät",
+        "expGrade": "Erfahrungsgrad",
+        "experiments": "Experimente",
+        "question": "Frage",
+        "grade": "Niveau",
+        "expId": "ID des Experiments",
+        "events": "Ereignisse",
+        "questions": "Fragen",
+        "type": "Typ",
+        "success": "Erfolg",
+        "position": "Position",
+        "export": "Tabelle exportieren"
     }
   }
 }

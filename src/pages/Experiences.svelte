@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getExperiencesConfigs, isNumberInt } from '../utils'
+  import { getExperiencesConfigs, isNumberInt } from '../utils/utils'
 
   import type { Question } from '../components/QuestionsForm/QuestionsForm.svelte'
   import type { Experiment } from '../types'
@@ -15,7 +15,7 @@
 
   let questions: Question[][] = []
   let events: Event[][] = []
-  
+
   const onFormSubmit = (index: number): void => {
     const experience = experiences[index]
     const experimentResult: Experiment = {
@@ -56,9 +56,9 @@
       />
   </Page>
   <Page>
-    <PostExperience 
+    <PostExperience
       onSubmit={() => onFormSubmit(i)}
-      bind:questions={questions[i]} 
+      bind:questions={questions[i]}
     />
   </Page>
 {/each}

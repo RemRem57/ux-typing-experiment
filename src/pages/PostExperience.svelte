@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n'
 
   import type { Question } from '../components/QuestionsForm/QuestionsForm.svelte'
-  import { isDefined } from '../utils'
+  import { isDefined } from '../utils/utils'
   import PostExperienceQuestions from '../components/PostExperienceQuestions.svelte'
   import NextButton from '../components/NextButton.svelte'
 

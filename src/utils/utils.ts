@@ -3,11 +3,11 @@ import {
   CHUNK_SIZES,
   DESKTOP_SCREEN_MIN_WIDTH,
   NON_ALPHANUMERIC_REGEX
-} from './const'
+} from '../const'
 import type {
   ChunkLength, ExperienceConfig, Experiment
-} from './types'
-import type { User } from './types'
+} from '../types'
+import type { User } from '../types'
 
 export const getChunk = (str: string, size: number): string[] => {
   return str.match(new RegExp('.{1,' + size + '}', 'g'))
@@ -133,3 +133,18 @@ export const getFilteredExperiencesByChunkSize = (
 export const getRandomAlphaCharacter = (amount: number):string => (
   Math.random().toString(36).slice(amount)
 )
+
+export const downloadBlob = (blobPromise: Promise<Blob>, filename: string, fileExtension: string): void => {
+  var url = window.URL || window.webkitURL
+  blobPromise.then((blob) => {
+    let link = url.createObjectURL(blob)
+
+    // Cheat code to download file
+    let a = document.createElement('a')
+    a.setAttribute('download', filename + '.' + fileExtension)
+    a.setAttribute('href', link)
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  })
+}
